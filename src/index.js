@@ -1,6 +1,7 @@
 import React from 'react';
 import {render} from 'react-dom';
 import App from './components/App';
+import img from './../public/favicon.ico'
 
 const svgFile = window.location.href + 'images/icons.svg';
 fetch(svgFile).then((result) => {

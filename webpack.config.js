@@ -36,6 +36,17 @@ const config = {
                 }, {
                     loader: "sass-loader"
                 }]
+            },
+            {
+                test: /\.(png|jpg|gif|ico)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[name].[ext]'
+                        }
+                    }
+                ],
             }
         ]
     },
@@ -52,7 +63,8 @@ const config = {
             hash: true,
             title: 'React SVG sprite',
             template: './public/index.html',
-            filename: 'index.html'
+            filename: 'index.html',
+            favicon: './dist/favicon.ico'
         })
     ],
     mode: 'development',
