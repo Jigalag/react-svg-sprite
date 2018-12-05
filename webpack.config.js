@@ -63,8 +63,7 @@ const config = {
             hash: true,
             title: 'React SVG sprite',
             template: './public/index.html',
-            filename: 'index.html',
-            favicon: './dist/favicon.ico'
+            filename: 'index.html'
         })
     ],
     mode: 'development',
