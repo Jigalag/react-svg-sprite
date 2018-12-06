@@ -13,18 +13,18 @@ const config = {
                 use: ['babel-loader']
             },
             {
-                test: /public\/images\/.*\.svg$/, // your icons directory
+                test: /public\/images\/.*\.svg$/,
                 loader: 'svg-sprite-loader',
                 options: {
                     extract: true,
                     mode: {
-                        css: true, // Create a «css» sprite
-                        view: true, // Create a «view» sprite
-                        defs: true, // Create a «defs» sprite
-                        symbol: true, // Create a «symbol» sprite
-                        stack: true // Create a «stack» sprite
+                        css: true,
+                        view: true,
+                        defs: true,
+                        symbol: true,
+                        stack: true
                     },
-                    spriteFilename: '/images/icons.svg', // this is the destination of your sprite sheet
+                    spriteFilename: '/images/icons.svg'
                 }
             },
             {
