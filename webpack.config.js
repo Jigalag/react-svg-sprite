@@ -1,77 +1,75 @@
-const webpack = require('webpack');
 const path = require('path');
+
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+const DIST_DIR = path.resolve(__dirname, 'dist');
+const SRC_DIR = path.resolve(__dirname, 'src');
+const PUBLIC_DIR = path.resolve(__dirname, 'public');
 
 const config = {
-    entry: './src/index.js',
+    entry: `${SRC_DIR}/app/index.js`,
+    output: {
+        path: DIST_DIR,
+        filename: 'bundle.js',
+    },
     module: {
         rules: [
             {
-                test: /\.(js|jsx)$/,
-                exclude: /node_modules/,
-                use: ['babel-loader']
+                test: /\.jsx?$/,
+                include: SRC_DIR,
+                loader: 'babel-loader'
             },
             {
-                test: /public\/images\/.*\.svg$/,
-                loader: 'svg-sprite-loader',
-                options: {
-                    extract: true,
-                    mode: {
-                        css: true,
-                        view: true,
-                        defs: true,
-                        symbol: true,
-                        stack: true
-                    },
-                    spriteFilename: '/images/icons.svg'
-                }
-            },
-            {
-                test: /\.scss$/,
-                use: [{
-                    loader: "style-loader"
-                }, {
-                    loader: "css-loader"
-                }, {
-                    loader: "sass-loader"
-                }]
-            },
-            {
-                test: /\.(png|jpg|gif|ico)$/,
-                use: [
+                oneOf: [
                     {
-                        loader: 'file-loader',
-                        options: {
-                            name: '[name].[ext]'
-                        }
+                        test: /\.scss$/,
+                        use: ExtractTextPlugin.extract({
+                            fallback: "style-loader",
+                            use: "css-loader!sass-loader",
+                        })
                     }
-                ],
+                    ,
+                    {
+                        test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+                        loader: require.resolve('url-loader'),
+                        options: {
+                            limit: 10000,
+                            name: 'img/[name].[ext]',
+                        },
+                    },
+                    {
+                        test: /assets\/fonts\/*\.(eot|svg|ttf|woff|woff2)$/,
+                        use: {
+                            loader: 'file-loader',
+                            options: {
+                                name: 'fonts/[name][hash].[ext]'
+                            }
+                        }
+                    },
+                    {
+                        test: /\.svg$/,
+                        loader: 'svg-inline-loader'
+                    }
+                ]
             }
         ]
-    },
-    output: {
-        path: path.join(__dirname, 'dist'),
-        filename: 'index.js'
+
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin(),
-        new SpriteLoaderPlugin({
-            plainSprite: true
-        }),
         new HtmlWebpackPlugin({
             hash: true,
             title: 'React SVG sprite',
-            template: './public/index.html',
+            template: `${PUBLIC_DIR}/index.html`,
             filename: 'index.html'
-        })
+        }),
+        new ExtractTextPlugin('style.css')
     ],
-    mode: 'development',
     devServer: {
-        contentBase: path.join(__dirname, 'dist'),
-        hot: true,
-        port: 3000,
-        open: true
+        contentBase: SRC_DIR,
+        watchContentBase: true,
+        port: 3006,
+        compress: true
     }
 };
 

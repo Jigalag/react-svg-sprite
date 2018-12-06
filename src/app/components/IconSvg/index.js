@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-function requireAll(r) {
-    r.keys().forEach(r);
-}
-requireAll(require.context('../../../public/images/', true, /\.svg$/));
+// function requireAll(r) {
+//     r.keys().forEach(r);
+// }
+// requireAll(require.context('../../../public/images/', true, /\.svg$/));
 
 class IconSvg extends Component {
 
