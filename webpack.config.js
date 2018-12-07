@@ -39,7 +39,8 @@ const config = {
                         },
                     },
                     {
-                        test: /assets\/fonts\/*\.(eot|svg|ttf|woff|woff2)$/,
+                        test: /\.(eot|svg|ttf|woff|woff2)$/,
+                        exclude: PUBLIC_DIR,
                         use: {
                             loader: 'file-loader',
                             options: {
@@ -66,7 +67,7 @@ const config = {
         new ExtractTextPlugin('style.css')
     ],
     devServer: {
-        contentBase: SRC_DIR,
+        contentBase: PUBLIC_DIR,
         watchContentBase: true,
         port: 3006,
         compress: true
