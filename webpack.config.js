@@ -70,7 +70,8 @@ const config = {
         contentBase: PUBLIC_DIR,
         watchContentBase: true,
         port: 3006,
-        compress: true
+        compress: true,
+        historyApiFallback: true
     }
 };
 
