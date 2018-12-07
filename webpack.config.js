@@ -6,6 +6,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const DIST_DIR = path.resolve(__dirname, 'dist');
 const SRC_DIR = path.resolve(__dirname, 'src');
 const PUBLIC_DIR = path.resolve(__dirname, 'public');
+const PORT = 3000;
 
 const config = {
     entry: `${SRC_DIR}/app/index.js`,
@@ -69,7 +70,7 @@ const config = {
     devServer: {
         contentBase: PUBLIC_DIR,
         watchContentBase: true,
-        port: 3006,
+        port: PORT,
         compress: true,
         historyApiFallback: true
     }
