@@ -10,7 +10,8 @@
   "scripts": {
     "start": "webpack-dev-server --mode development --colors --hot",
     "build": "node scripts/build.js",
-    "generate-sprite": "node scripts/generate-svg-sprite.js"
+    "generate-sprite": "node scripts/generate-svg-sprite.js",
+    "generate-sprite-npm": "svg-sprite --symbol --shape-id-separator= --dest=./public/images/sprite/ ./public/images/*.svg"
   },
   "author": "",
   "license": "ISC",
